@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Download BroanyX Browser — The privacy-first, Tor-routed, ad-free desktop browser for Windows." />
+  <title>BroanyX Browser — Privacy-First Desktop Browser</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:    #7c3aed;
+      --purple-l:  #a855f7;
+      --purple-d:  #6d28d9;
+      --teal:      #00ffcc;
+      --bg:        #07070f;
+      --bg2:       #0d0d1a;
+      --bg3:       #131325;
+      --text:      #e2e2ff;
+      --muted:     #8080aa;
+      --border:    #2a2a4a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Animated starfield background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(124,58,237,.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 70%, rgba(168,85,247,.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 50%, rgba(0,255,204,.3) 0%, transparent 100%);
+      background-size: 400px 400px, 600px 600px, 300px 300px;
+      animation: drift 30s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes drift {
+      0%   { background-position: 0 0,   0 0,   0 0; }
+      100% { background-position: 400px 400px, -600px 600px, 300px -300px; }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 64px;
+      background: rgba(7,7,15,.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-logo span { color: var(--purple-l); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--purple);
+      color: white !important;
+      padding: .5rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 700 !important;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--purple-l) !important; color: white !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 7rem 2rem 5rem;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(124,58,237,.15);
+      border: 1px solid rgba(124,58,237,.4);
+      color: var(--purple-l);
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      animation: fadeDown .6s ease both;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -.03em;
+      margin-bottom: 1.5rem;
+      animation: fadeDown .7s ease .1s both;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--purple-l), var(--teal));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      animation: fadeDown .7s ease .2s both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeDown .7s ease .3s both;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: linear-gradient(135deg, var(--purple), var(--purple-l));
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: .9rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(124,58,237,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(124,58,237,.6);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: transparent;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: .9rem 1.75rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: border-color .2s, color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--purple); color: var(--text); }
+
+    .hero-meta {
+      margin-top: 1.5rem;
+      color: var(--muted);
+      font-size: .85rem;
+      animation: fadeDown .7s ease .4s both;
+    }
+
+    /* ── ICON GLOW ── */
+    .icon-glow {
+      position: relative;
+      margin-bottom: 2.5rem;
+      animation: float 4s ease-in-out infinite;
+    }
+    .icon-glow img {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      box-shadow: 0 0 60px rgba(124,58,237,.7), 0 0 120px rgba(124,58,237,.3);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    /* ── FEATURES ── */
+    .section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 3.5rem;
+    }
+    .section-title span { color: var(--purple-l); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color .25s, transform .25s;
+    }
+    .feature-card:hover {
+      border-color: var(--purple);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+    .feature-card p {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+
+    /* ── DOWNLOAD ── */
+    .download-section {
+      position: relative;
+      z-index: 1;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .download-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .download-inner h2 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    .download-inner p {
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .version-tag {
+      display: inline-block;
+      background: rgba(0,255,204,.1);
+      border: 1px solid rgba(0,255,204,.3);
+      color: var(--teal);
+      padding: .25rem .75rem;
+      border-radius: 6px;
+      font-size: .8rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    .sys-req {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .sys-req-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* ── UPDATE SECTION ── */
+    .update-box {
+      background: linear-gradient(135deg, rgba(124,58,237,.12), rgba(0,255,204,.06));
+      border: 1px solid rgba(124,58,237,.3);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+    }
+    .update-box h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: .75rem;
+    }
+    .update-box p {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+    .update-box .teal { color: var(--teal); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--muted);
+      font-size: .85rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--purple-l); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="icon.png" alt="BroanyX icon" />
+      Broan<span>yX</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#download">Download</a></li>
+      <li><a href="https://github.com/Broanyx/BroanyX-browser" target="_blank">GitHub</a></li>
+      <li><a href="#download" class="nav-cta">Get Browser</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="icon-glow">
+      <img src="icon.png" alt="BroanyX Browser Icon" />
+    </div>
+    <div class="hero-badge">🛡️ Privacy-First &nbsp;·&nbsp; Tor-Routed &nbsp;·&nbsp; Ad-Free</div>
+    <h1>The browser that<br/><span>protects you.</span></h1>
+    <p class="hero-sub">
+      BroanyX routes all your traffic through the Tor network, blocks ads
+      at the network level, and never stores your data. Browse freely.
+    </p>
+    <div class="hero-btns">
+      <a id="main-download-btn" href="https://github.com/Broanyx/BroanyX-browser/releases/latest/download/BroanyX-Setup.exe" class="btn-primary">
+        ⬇️ Download for Windows
+      </a>
+      <a href="https://github.com/Broanyx/BroanyX-browser" target="_blank" class="btn-secondary">
+        ⭐ View on GitHub
+      </a>
+    </div>
+    <p class="hero-meta">Free &amp; Open Source &nbsp;·&nbsp; Windows 10/11 &nbsp;·&nbsp; v1.0.0</p>
+  </section>
+
+  <!-- Features -->
+  <section class="section" id="features">
+    <h2 class="section-title">Everything you need to <span>stay private</span></h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🧅</div>
+        <h3>Tor Network Routing</h3>
+        <p>All traffic is automatically routed through the Tor anonymity network. Your real IP is always hidden.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚫</div>
+        <h3>Network-Level Ad Blocking</h3>
+        <p>Blocks ads, trackers, and malware domains using EasyList + EasyPrivacy rules before they reach the page.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>WebRTC &amp; Geolocation Disabled</h3>
+        <p>Prevents WebRTC IP leaks and disables geolocation APIs that could expose your location.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🕵️</div>
+        <h3>User-Agent Spoofing</h3>
+        <p>Randomizes your browser fingerprint so websites can't track you across sessions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3>Auto-Updates</h3>
+        <p>The browser silently checks for updates on launch and notifies you in-app when a new version is ready.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Dark Web Support</h3>
+        <p>Browse .onion sites natively through the built-in Tor integration. No extra config needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Auto-update info -->
+  <section class="section">
+    <div class="update-box">
+      <h3>🔄 Always Up to Date</h3>
+      <p>
+        BroanyX checks for updates automatically every time you open it.<br/>
+        When a new version is released, you'll see a <span class="teal">notification banner</span> inside the browser
+        with a direct download link — no manual checking needed.
+      </p>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section class="download-section" id="download">
+    <div class="download-inner">
+      <div class="version-tag">v1.0.0 — Latest Release</div>
+      <h2>Download BroanyX</h2>
+      <p>
+        Click below to download the installer. Run it to install BroanyX Browser —
+        no Python or extra software required. Works on Windows 10 and 11.
+      </p>
+      <a href="https://github.com/Broanyx/BroanyX-browser/releases/latest/download/BroanyX-Setup.exe"
+         class="btn-primary" id="download-btn" style="display:inline-flex; font-size:1.2rem; padding:1.1rem 2.5rem;">
+        ⬇️ Download BroanyX-Setup.exe
+      </a>
+      <div class="sys-req">
+        <div class="sys-req-item">✅ Windows 10/11 (64-bit)</div>
+        <div class="sys-req-item">✅ ~150MB disk space</div>
+        <div class="sys-req-item">✅ No Python required</div>
+        <div class="sys-req-item">✅ Free &amp; open source</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      © 2025 <a href="https://github.com/Broanyx" target="_blank">BroanyX</a> &nbsp;·&nbsp;
+      <a href="https://github.com/Broanyx/BroanyX-browser" target="_blank">GitHub</a> &nbsp;·&nbsp;
+      Built with Python, PyQt6, and open-source privacy tools.
+    </p>
+  </footer>
+
+</body>
+</html>
