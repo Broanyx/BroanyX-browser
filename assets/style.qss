@@ -1,0 +1,338 @@
+/* =========================================================
+   BroanyX Browser — Dark Mode Qt Stylesheet
+   =========================================================
+   Color palette:
+     bg-deep:    #0a0a12   (darkest — main window bg)
+     bg-card:    #12121e   (panels, tab bar)
+     bg-nav:     #1a1a2e   (toolbar, URL bar)
+     bg-hover:   #252540   (hover states)
+     accent:     #7c3aed   (purple — primary accent)
+     accent-lt:  #a855f7   (lighter purple — highlights)
+     text:       #e0e0ff   (primary text)
+     text-muted: #8080aa   (secondary/muted text)
+     border:     #2e2e4e   (subtle border)
+     success:    #22c55e   (Tor connected green)
+     danger:     #ef4444   (Tor disconnected red)
+     warning:    #f59e0b   (Tor bootstrapping amber)
+======================================================== */
+
+/* ── Main Window ──────────────────────────────────────── */
+QMainWindow {
+    background-color: #0a0a12;
+    color: #e0e0ff;
+}
+
+QWidget {
+    background-color: #0a0a12;
+    color: #e0e0ff;
+    font-family: "Segoe UI", "Inter", sans-serif;
+    font-size: 13px;
+}
+
+/* ── Menu Bar ─────────────────────────────────────────── */
+QMenuBar {
+    background-color: #12121e;
+    color: #e0e0ff;
+    border-bottom: 1px solid #2e2e4e;
+    padding: 2px 4px;
+}
+
+QMenuBar::item {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: transparent;
+}
+
+QMenuBar::item:selected {
+    background-color: #252540;
+}
+
+QMenu {
+    background-color: #1a1a2e;
+    color: #e0e0ff;
+    border: 1px solid #4a4a6a;
+    border-radius: 8px;
+    padding: 6px 4px;
+}
+
+QMenu::item {
+    padding: 6px 24px;
+    border-radius: 4px;
+}
+
+QMenu::item:selected {
+    background-color: #7c3aed;
+    color: #ffffff;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: #2e2e4e;
+    margin: 4px 10px;
+}
+
+/* ── Toolbar ──────────────────────────────────────────── */
+QToolBar {
+    background-color: #12121e;
+    border-bottom: 1px solid #2e2e4e;
+    padding: 6px 8px;
+    spacing: 6px;
+}
+
+QToolBar::separator {
+    width: 1px;
+    background-color: #2e2e4e;
+    margin: 4px 2px;
+}
+
+/* ── Navigation Buttons ───────────────────────────────── */
+QToolButton, QPushButton {
+    background-color: #1a1a2e;
+    color: #e0e0ff;
+    border: 1px solid #2e2e4e;
+    border-radius: 6px;
+    padding: 5px 10px;
+    min-width: 28px;
+    min-height: 28px;
+}
+
+QToolButton:hover, QPushButton:hover {
+    background-color: #252540;
+    border-color: #7c3aed;
+    color: #ffffff;
+}
+
+QToolButton:pressed, QPushButton:pressed {
+    background-color: #7c3aed;
+    border-color: #a855f7;
+}
+
+QToolButton:disabled, QPushButton:disabled {
+    color: #4a4a6a;
+    border-color: #1e1e38;
+    background-color: #12121e;
+}
+
+/* ── New Tab Button (corner widget) ───────────────────── */
+QPushButton#newTabButton {
+    background-color: #1a1a2e;
+    color: #a855f7;
+    border: 1px solid #2e2e4e;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0;
+    min-width: 28px;
+    min-height: 28px;
+    max-width: 28px;
+    max-height: 28px;
+}
+
+QPushButton#newTabButton:hover {
+    background-color: #7c3aed;
+    color: #ffffff;
+    border-color: #a855f7;
+}
+
+/* ── URL Bar ──────────────────────────────────────────── */
+QLineEdit {
+    background-color: #1a1a2e;
+    color: #e0e0ff;
+    border: 1.5px solid #2e2e4e;
+    border-radius: 20px;
+    padding: 6px 16px;
+    selection-background-color: #7c3aed;
+    font-size: 14px;
+}
+
+QLineEdit:focus {
+    border-color: #7c3aed;
+    background-color: #1e1e38;
+}
+
+QLineEdit:hover {
+    border-color: #4a4a6a;
+}
+
+/* ── Tab Bar ──────────────────────────────────────────── */
+QTabWidget::pane {
+    border: none;
+    background-color: #0a0a12;
+}
+
+QTabWidget::tab-bar {
+    left: 0;
+}
+
+QTabBar {
+    background-color: #12121e;
+    border-bottom: 1px solid #2e2e4e;
+}
+
+QTabBar::tab {
+    background-color: #12121e;
+    color: #8080aa;
+    border: none;
+    border-right: 1px solid #1e1e38;
+    padding: 8px 16px 8px 12px;
+    min-width: 140px;
+    max-width: 220px;
+}
+
+QTabBar::tab:selected {
+    background-color: #1a1a2e;
+    color: #e0e0ff;
+    border-bottom: 2px solid #7c3aed;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #1e1e38;
+    color: #e0e0ff;
+}
+
+QTabBar::close-button {
+    image: url(none);  /* hide default — we'll use text */
+    subcontrol-position: right;
+    margin-right: 4px;
+}
+
+/* ── Status Bar ───────────────────────────────────────── */
+QStatusBar {
+    background-color: #12121e;
+    color: #8080aa;
+    border-top: 1px solid #2e2e4e;
+    font-size: 12px;
+    padding: 2px 8px;
+}
+
+QStatusBar::item {
+    border: none;
+}
+
+/* ── Progress Bar ─────────────────────────────────────── */
+QProgressBar {
+    background-color: #1a1a2e;
+    border: none;
+    border-radius: 0;
+    height: 2px;
+    text-align: center;
+    color: transparent;
+}
+
+QProgressBar::chunk {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+        stop:0 #7c3aed, stop:1 #a855f7);
+    border-radius: 1px;
+}
+
+/* ── Scroll Bars ──────────────────────────────────────── */
+QScrollBar:vertical {
+    background: #12121e;
+    width: 8px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #2e2e4e;
+    border-radius: 4px;
+    min-height: 24px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #7c3aed;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+QScrollBar:horizontal {
+    background: #12121e;
+    height: 8px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #2e2e4e;
+    border-radius: 4px;
+    min-width: 24px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #7c3aed;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0;
+}
+
+/* ── Splitters ────────────────────────────────────────── */
+QSplitter::handle {
+    background-color: #2e2e4e;
+}
+
+/* ── Tooltips ─────────────────────────────────────────── */
+QToolTip {
+    background-color: #252540;
+    color: #e0e0ff;
+    border: 1px solid #4a4a6a;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+/* ── Tor Status Label ─────────────────────────────────── */
+QLabel#torStatusLabel {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid #2e2e4e;
+}
+
+QLabel#torStatusConnected {
+    color: #22c55e;
+    background-color: #052e16;
+    border-color: #22c55e;
+}
+
+QLabel#torStatusConnecting {
+    color: #f59e0b;
+    background-color: #1c1107;
+    border-color: #f59e0b;
+}
+
+QLabel#torStatusDisconnected {
+    color: #ef4444;
+    background-color: #1c0a0a;
+    border-color: #ef4444;
+}
+
+/* ── Ad Block Counter Label ───────────────────────────── */
+QLabel#adBlockLabel {
+    color: #a855f7;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    background-color: #1a0a2e;
+    border: 1px solid #7c3aed;
+}
+
+/* ── Find Bar ─────────────────────────────────────────── */
+QWidget#findBar {
+    background-color: #1a1a2e;
+    border-top: 1px solid #2e2e4e;
+    padding: 4px 8px;
+}
+
+/* ── Message box overrides ────────────────────────────── */
+QMessageBox {
+    background-color: #1a1a2e;
+    color: #e0e0ff;
+}
+
+QMessageBox QPushButton {
+    min-width: 80px;
+}

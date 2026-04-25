@@ -1,0 +1,6 @@
+PyQt6>=6.6.0
+PyQt6-WebEngine>=6.6.0
+stem>=1.8.2
+PySocks>=1.7.1
+adblockparser>=0.7
+requests>=2.31.0

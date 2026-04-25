@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.spec.bak
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# PyInstaller output (too large for git — distribute via GitHub Releases)
+dist/
+build/
+
+# Adblock cache (auto-regenerated)
+.adblock_cache/
+
+# Tor data (private)
+.tor_data/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+*.bak
+~$*
+
+# Secrets
+*.env
+.env
+secrets.py
